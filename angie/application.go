@@ -19,8 +19,23 @@ type Application struct {
 	routeMap map[Method](map[Route]Middleware)
 }
 
-func (app *Application) Get(route string, middleware Middleware) IApplication {
+func (app *Application) Get(route Route, middleware Middleware) IApplication {
 	app.routeMap[GET][route] = middleware
+	return app
+}
+
+func (app *Application) Post(route Route, middleware Middleware) IApplication {
+	app.routeMap[POST][route] = middleware
+	return app
+}
+
+func (app *Application) Put(route Route, middleware Middleware) IApplication {
+	app.routeMap[PUT][route] = middleware
+	return app
+}
+
+func (app *Application) Delete(route Route, middleware Middleware) IApplication {
+	app.routeMap[DELETE][route] = middleware
 	return app
 }
 
