@@ -5,22 +5,14 @@ import (
 
 	"github.com/Drincann/angie-golang/request"
 	"github.com/Drincann/angie-golang/response"
+	"github.com/Drincann/angie-golang/types"
 )
-
-type Context struct {
-	Req     *request.Request
-	Res     *response.Response
-	Query   func(string) string
-	Querys  func(key string) []string
-	Header  func(string) string
-	Headers func(key string) []string
-}
 
 func (handler *Application) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 	request := request.New(req)
 	response := response.New(res)
 
-	ctx := Context{
+	ctx := types.Context{
 		Req:     request,
 		Res:     response,
 		Query:   request.Query,
