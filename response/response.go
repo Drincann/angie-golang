@@ -1,15 +1,17 @@
 package response
 
-import "net/http"
+import (
+	"bytes"
+	"net/http"
+)
 
 type Response struct {
-	Body   string
+	Body   bytes.Buffer
 	Status int
 }
 
 func New(res http.ResponseWriter) *Response {
 	return &Response{
 		Status: http.StatusOK,
-		Body:   "",
 	}
 }

@@ -1,8 +1,6 @@
 package types
 
-import (
-	"github.com/Drincann/angie-golang/webContext"
-)
+import "github.com/Drincann/angie-golang/webContext"
 
 type IApplication interface {
 	Get(route string, middleware Middleware) IApplication
@@ -12,9 +10,7 @@ type IApplication interface {
 	Listen(port int32) // panic if error
 }
 
-type Context = webContext.WebContext
-
-type Middleware func(ctx *Context)
+type Middleware func(ctx *webContext.WebContext)
 
 type Method = string
 
