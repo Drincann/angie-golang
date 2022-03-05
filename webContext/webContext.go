@@ -59,7 +59,7 @@ func (ctx *WebContext) ResJson(js JSONObj) *WebContext {
 }
 
 func (ctx *WebContext) ResString(str string) *WebContext {
-	ctx.SetHeader("Content-Type", "text/plain")
+	ctx.SetHeader("Content-Type", "text/plain; charset=utf-8")
 	ctx.Res.Body.Write([]byte(str))
 	return ctx
 }
