@@ -40,10 +40,6 @@ func (app *Application) Listen(port int32) {
 	}
 }
 
-func (app *Application) entry(ctx *types.Context) {
-	app.router.Handle(ctx)
-}
-
 func newApplication() *Application {
 	return &Application{
 		router: router.New(),
