@@ -52,19 +52,19 @@ func (ctx *WebContext) SetHeader(key string, value string) *WebContext {
 
 type JSONObj = map[string]interface{}
 
-func (ctx *WebContext) SetJson(js JSONObj) *WebContext {
+func (ctx *WebContext) ResJson(js JSONObj) *WebContext {
 	ctx.SetHeader("Content-Type", "application/json")
 	json.NewEncoder(&ctx.Res.Body).Encode(js)
 	return ctx
 }
 
-func (ctx *WebContext) SetString(str string) *WebContext {
+func (ctx *WebContext) ResString(str string) *WebContext {
 	ctx.SetHeader("Content-Type", "text/plain")
 	ctx.Res.Body.Write([]byte(str))
 	return ctx
 }
 
-func (ctx *WebContext) SetBytes(bs []byte) *WebContext {
+func (ctx *WebContext) ResBytes(bs []byte) *WebContext {
 	ctx.SetHeader("Content-Type", "application/octet-stream")
 	ctx.Res.Body.Write(bs)
 	return ctx

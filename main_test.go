@@ -22,13 +22,13 @@ func (str StringReader) Read(p []byte) (n int, err error) {
 func init() {
 	app := angie.New()
 	go app.Post("/", func(ctx *angie.Context) {
-		ctx.SetString("Hello World!")
+		ctx.ResString("Hello World!")
 	}).Get("/", func(ctx *angie.Context) {
-		ctx.SetString("Hello World!")
+		ctx.ResString("Hello World!")
 	}).Put("/", func(ctx *angie.Context) {
-		ctx.SetString("Hello World!")
+		ctx.ResString("Hello World!")
 	}).Delete("/", func(ctx *angie.Context) {
-		ctx.SetString("Hello World!")
+		ctx.ResString("Hello World!")
 	}).Listen(port)
 }
 
