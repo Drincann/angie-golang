@@ -5,19 +5,16 @@ import (
 
 	"github.com/Drincann/angie-golang/request"
 	"github.com/Drincann/angie-golang/response"
-	"github.com/Drincann/angie-golang/types"
 )
 
-func newContext(res http.ResponseWriter, req *http.Request) *types.Context {
+func newContext(res http.ResponseWriter, req *http.Request) *Context {
 	request := request.New(req)
 	response := response.New(res)
-	return &types.Context{
-		Req:     request,
-		Res:     response,
-		Query:   request.Query,
-		Querys:  request.Querys,
-		Header:  request.Header,
-		Headers: request.Headers,
+	return &Context{
+		OriginReq: req,
+		OriginRes: res,
+		Req:       request,
+		Res:       response,
 	}
 }
 

@@ -1,5 +1,11 @@
 package angie
 
-func New() IApplication {
+import (
+	"github.com/Drincann/angie-golang/types"
+)
+
+func New() types.IApplication {
 	return newApplication()
 }
+
+type Context = types.Context

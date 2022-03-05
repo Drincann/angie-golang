@@ -7,7 +7,6 @@ import (
 	"testing"
 
 	"github.com/Drincann/angie-golang/angie"
-	"github.com/Drincann/angie-golang/types"
 )
 
 const (
@@ -22,13 +21,13 @@ func (str StringReader) Read(p []byte) (n int, err error) {
 
 func init() {
 	app := angie.New()
-	go app.Post("/", func(ctx *types.Context) {
+	go app.Post("/", func(ctx *angie.Context) {
 		ctx.Res.Body = "Hello World!"
-	}).Get("/", func(ctx *types.Context) {
+	}).Get("/", func(ctx *angie.Context) {
 		ctx.Res.Body = "Hello World!"
-	}).Put("/", func(ctx *types.Context) {
+	}).Put("/", func(ctx *angie.Context) {
 		ctx.Res.Body = "Hello World!"
-	}).Delete("/", func(ctx *types.Context) {
+	}).Delete("/", func(ctx *angie.Context) {
 		ctx.Res.Body = "Hello World!"
 	}).Listen(port)
 }

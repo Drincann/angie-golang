@@ -1,18 +1,18 @@
 package types
 
 import (
-	"github.com/Drincann/angie-golang/request"
-	"github.com/Drincann/angie-golang/response"
+	"github.com/Drincann/angie-golang/webContext"
 )
 
-type Context struct {
-	Req     *request.Request
-	Res     *response.Response
-	Query   func(string) string
-	Querys  func(key string) []string
-	Header  func(string) string
-	Headers func(key string) []string
+type IApplication interface {
+	Get(route string, middleware Middleware) IApplication
+	Post(route string, middleware Middleware) IApplication
+	Put(route string, middleware Middleware) IApplication
+	Delete(route string, middleware Middleware) IApplication
+	Listen(port int32) // panic if error
 }
+
+type Context = webContext.WebContext
 
 type Middleware func(ctx *Context)
 

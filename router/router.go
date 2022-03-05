@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/Drincann/angie-golang/types"
+	"github.com/Drincann/angie-golang/webContext"
 )
 
 type Router struct {
@@ -15,7 +16,7 @@ func (router *Router) Route(method string, route string, middleware types.Middle
 	return router
 }
 
-func (router *Router) Handle(ctx *types.Context) *Router {
+func (router *Router) Handle(ctx *webContext.WebContext) *Router {
 	if middleware, ok := router.routeMap[ctx.Req.Method][ctx.Req.Route]; ok {
 		middleware(ctx)
 	} else {
