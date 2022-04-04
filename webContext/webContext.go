@@ -2,7 +2,9 @@ package webContext
 
 import (
 	"encoding/json"
+	"io/ioutil"
 	"net/http"
+	"path"
 
 	"github.com/Drincann/angie-golang/request"
 	"github.com/Drincann/angie-golang/response"
@@ -66,6 +68,29 @@ func (ctx *WebContext) ResString(str string) *WebContext {
 
 func (ctx *WebContext) ResBytes(bs []byte) *WebContext {
 	ctx.SetHeader("Content-Type", "application/octet-stream")
+	ctx.Res.Body.Write(bs)
+	return ctx
+}
+
+func (ctx *WebContext) ResHTML(html string) *WebContext {
+	ctx.SetHeader("Content-Type", "text/html; charset=utf-8")
+	ctx.Res.Body.Write([]byte(html))
+	return ctx
+}
+
+func (ctx *WebContext) ResFile(filepath string) *WebContext {
+	ctx.SetHeader("Content-Type", "application/octet-stream")
+	// filename
+	filename := path.Base(filepath)
+	ctx.SetHeader("Content-Disposition", "attachment; filename="+filename)
+	// file size
+
+	// read file
+	bs, err := ioutil.ReadFile(filepath)
+	if err != nil {
+		ctx.Res.Status = http.StatusInternalServerError
+		ctx.Res.Body.Write([]byte(err.Error()))
+	}
 	ctx.Res.Body.Write(bs)
 	return ctx
 }
