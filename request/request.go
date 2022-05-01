@@ -3,6 +3,7 @@ package request
 import "net/http"
 
 type Request struct {
+	req         *http.Request
 	Method      string
 	Route       string
 	queryString map[string][]string
@@ -11,6 +12,7 @@ type Request struct {
 
 func New(req *http.Request) *Request {
 	return &Request{
+		req:         req,
 		Method:      req.Method,
 		Route:       req.URL.Path,
 		queryString: req.URL.Query(),
@@ -48,4 +50,8 @@ func (req *Request) Header(key string) string {
 
 func (req *Request) Headers(key string) []string {
 	return getArrayFromMapArray(req.header, key)
+}
+
+func (req *Request) FromData(key string) string {
+	return req.req.FormValue(key)
 }
